@@ -1,6 +1,20 @@
 import { useState } from "react";
 import EmployerDashboard from "./EmployerDashboard";
 import PostJob from "./PostJob";
+import jobs from "./jobs";
+
+const getEmailAddress = (value = "") =>
+  value.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0];
+
+const getApplyLink = (job) => {
+  const email = getEmailAddress(job.applyLink) || getEmailAddress(job.contact);
+
+  if (email) {
+    return `mailto:${email}`;
+  }
+
+  return job.applyLink;
+};
 
 function App() {
   const [page, setPage] = useState("Home");
@@ -15,54 +29,6 @@ function App() {
   ];
 
   const todaysJoke = jokes[new Date().getDate() % jokes.length];
-
-  const jobs = [
-    {
-      title: "Assistant Superintendent",
-      course: "Goshen Golf Club",
-      location: "Augusta, Georgia",
-      housing: "Housing Unknown",
-      pay: "Not listed",
-      applyText: "Call to Apply",
-      applyLink: "tel:7067931035",
-      contact: "706-793-1035",
-      description:
-        "Assistant Superintendent position supporting golf course maintenance operations, turf health, irrigation, fertilizer and pesticide programs, staff supervision, course setup, and record keeping.",
-    },
-    {
-      title: "Line Cook",
-      course: "Sagebrush Golf Club",
-      location: "Merritt, BC",
-      housing: "No Housing",
-      pay: "Not listed",
-      applyText: "Apply / Contact",
-      applyLink: "#",
-      contact: "Contact employer",
-      description: "Kitchen position at Sagebrush Golf Club.",
-    },
-    {
-      title: "Grounds Crew",
-      course: "Fairmont Hot Springs Resort",
-      location: "Fairmont Hot Springs, BC",
-      housing: "Housing Available",
-      pay: "Not listed",
-      applyText: "Apply / Contact",
-      applyLink: "#",
-      contact: "Contact employer",
-      description: "Grounds crew position with housing available.",
-    },
-    {
-      title: "Guest Services",
-      course: "Big Sky Golf Club",
-      location: "Pemberton, BC",
-      housing: "Partial Housing",
-      pay: "Not listed",
-      applyText: "Apply / Contact",
-      applyLink: "#",
-      contact: "Contact employer",
-      description: "Guest services position with partial housing.",
-    },
-  ];
 
   const filteredJobs =
     filter === "All" ? jobs : jobs.filter((job) => job.housing === filter);
@@ -187,8 +153,8 @@ function App() {
               <p>
                 <strong>Contact:</strong> {job.contact}
               </p>
-              <a href={job.applyLink} style={applyButtonStyle}>
-                {job.applyText}
+              <a href={getApplyLink(job)} style={applyButtonStyle}>
+                Contact Employer
               </a>
             </div>
           ))}
