@@ -1,195 +1,100 @@
-const jobs = [
-  {
-    title: "Assistant Superintendent",
-    course: "Goshen Golf Club",
-    location: "Augusta, Georgia",
-    housing: "Housing Unknown",
-    pay: "Not listed",
-    applyText: "Call to Apply",
-    applyLink: "tel:7067931035",
-    contact: "706-793-1035",
-    description:
-      "Assistant Superintendent position supporting golf course maintenance operations, turf health, irrigation, fertilizer and pesticide programs, staff supervision, course setup, and record keeping.",
-  },
-  {
-    title: "Line Cook",
-    course: "Sagebrush Golf Club",
-    location: "Merritt, BC",
-    housing: "No Housing",
-    pay: "Not listed",
-    applyText: "Visit Employer",
-    applyLink: "https://sagebrushgolfclub.com/contact-us/",
-    contact: "Contact employer",
-    courseRating: 4.7,
-    difficulty: "Hard",
-    staffRating: 4.2,
-    description: "Kitchen position at Sagebrush Golf Club.",
-  },
-  {
-    title: "Grounds Crew",
-    course: "Fairmont Hot Springs Resort",
-    location: "Fairmont Hot Springs, BC",
-    housing: "Housing Available",
-    pay: "Not listed",
-    applyText: "Visit Employer",
-    applyLink: "https://www.fairmonthotsprings.com/careers",
-    contact: "Contact employer",
-    description: "Grounds crew position with housing available.",
-  },
-  {
-    title: "Guest Services",
-    course: "Big Sky Golf Club",
-    location: "Pemberton, BC",
-    housing: "Partial Housing",
-    pay: "Not listed",
-    applyText: "Visit Employer",
-    applyLink: "https://bigskygolf.ca/contact-us/",
-    contact: "Contact employer",
-    courseRating: 4.6,
-    difficulty: "Moderate",
-    staffRating: 4.0,
-    description: "Guest services position with partial housing.",
-  },
-  {
-    title: "Maintenance",
-    course: "Sandpiper Golf Course",
-    location: "Harrison Mills, BC",
-    housing: "No Housing",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://www.sandpipergolf.com",
-    contact: "Contact employer",
-    courseRating: 4.3,
-    difficulty: "Moderate",
-    staffRating: 3.9,
-    description: "Seasonal maintenance role at a scenic Fraser Valley course.",
-  },
-  {
-    title: "Resort Staff",
-    course: "Fairmont Banff Springs",
-    location: "Banff, AB",
-    housing: "Housing Available",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://careers.accor.com",
-    contact: "Contact employer",
-    courseRating: 4.8,
-    difficulty: "Hard",
-    staffRating: 4.5,
-    description: "Luxury resort golf environment with staff housing.",
-  },
-  {
-    title: "Guest Services",
-    course: "Whistler Golf Club",
-    location: "Whistler, BC",
-    housing: "Partial Housing",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://www.whistlergolf.com",
-    contact: "Contact employer",
-    courseRating: 4.4,
-    difficulty: "Moderate",
-    staffRating: 4.0,
-    description: "Guest services role at a high traffic Whistler course.",
-  },
-  {
-    title: "Resort Operations",
-    course: "Predator Ridge",
-    location: "Vernon, BC",
-    housing: "Housing Available",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://www.predatorridge.com",
-    contact: "Contact employer",
-    courseRating: 4.6,
-    difficulty: "Moderate-Hard",
-    staffRating: 4.3,
-    description: "Seasonal resort operations role at an Okanagan golf property.",
-  },
-  {
-    title: "Course Staff",
-    course: "Nicklaus North",
-    location: "Whistler, BC",
-    housing: "No Housing",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://nicklausnorth.com",
-    contact: "Contact employer",
-    courseRating: 4.5,
-    difficulty: "Moderate",
-    staffRating: 3.8,
-    description: "Course staff role at a well-known Whistler golf course.",
-  },
-  {
-    title: "Course / Hospitality Staff",
-    course: "Tobiano Golf Course",
-    location: "Kamloops, BC",
-    housing: "No Housing",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://tobianogolf.com",
-    contact: "Contact employer",
-    courseRating: 4.8,
-    difficulty: "Hard",
-    staffRating: 4.3,
-    description: "Seasonal course and hospitality work at a desert-style course overlooking Kamloops Lake.",
-  },
-  {
-    title: "Resort Staff",
-    course: "Talking Rock Golf Course",
-    location: "Chase, BC",
-    housing: "Partial Housing",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://qhotels.ca/talking-rock",
-    contact: "Contact employer",
-    courseRating: 4.6,
-    difficulty: "Moderate",
-    staffRating: 4.2,
-    description: "Lakeside resort golf role with strong tourism traffic.",
-  },
-  {
-    title: "Mountain Course Staff",
-    course: "Greywolf Golf Course",
-    location: "Panorama, BC",
-    housing: "Housing Available",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://greywolfgolf.com",
-    contact: "Contact employer",
-    courseRating: 4.7,
-    difficulty: "Hard",
-    staffRating: 4.4,
-    description: "Mountain course staff role at Greywolf Golf Course.",
-  },
-  {
-    title: "Resort / Course Staff",
-    course: "Sun Peaks Golf Course",
-    location: "Sun Peaks, BC",
-    housing: "Partial Housing",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://sunpeaksresort.com",
-    contact: "Contact employer",
-    courseRating: 4.5,
-    difficulty: "Moderate",
-    staffRating: 4.1,
-    description: "Seasonal resort and course staff role in a busy resort environment.",
-  },
-  {
-    title: "Course / Clubhouse Staff",
-    course: "The Rise Golf Course",
-    location: "Vernon, BC",
-    housing: "No Housing",
-    pay: "Contact employer",
-    applyText: "Visit Employer",
-    applyLink: "https://therisegolf.ca",
-    contact: "Contact employer",
-    courseRating: 4.5,
-    difficulty: "Moderate-Hard",
-    staffRating: 4.1,
-    description: "Course and clubhouse staff role at an elevated course with panoramic views.",
-  },
-];
+import { useState } from "react";
+import EmployerDashboard from "./EmployerDashboard";
+import PostJob from "./PostJob";
+import jobs from "./jobs";
+import "./App.css";
 
-export default jobs;
+const getEmailAddress = (value = "") =>
+  value.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0];
+
+const getApplyLink = (job) => {
+  const email = getEmailAddress(job.applyLink) || getEmailAddress(job.contact);
+
+  if (email) {
+    return `mailto:${email}`;
+  }
+
+  return job.applyLink;
+};
+
+function App() {
+  const [page, setPage] = useState(() =>
+    window.location.hash === "#filters" ? "Jobs" : "Home",
+  );
+  const [filter, setFilter] = useState("All");
+  const [locationFilter, setLocationFilter] = useState("All Locations");
+
+  const jokes = [
+    "Why do golfers carry two pairs of pants? In case they get a hole in one.",
+    "I'm not saying my golf game is bad, but I just got a sponsorship from Top Flite.",
+    "My golf game is like taxes - I lose a lot of balls and don't know where they went.",
+    "Golf is the only sport where yelling 'FORE!' actually makes things worse.",
+    "Why did the golfer bring an extra sock? In case he got a hole in one.",
+  ];
+
+  const todaysJoke = jokes[new Date().getDate() % jokes.length];
+
+  const filteredJobs = jobs.filter((job) => {
+    const housingMatch = filter === "All" || job.housing === filter;
+    const locationMatch =
+      locationFilter === "All Locations" || getRegion(job.location) === locationFilter;
+
+    return housingMatch && locationMatch;
+  });
+
+  const housingGroups = {
+    "Housing Available": jobs.filter((job) => job.housing === "Housing Available"),
+    "Partial Housing": jobs.filter((job) => job.housing === "Partial Housing"),
+    "No Housing": jobs.filter((job) => job.housing === "No Housing"),
+    "Housing Unknown": jobs.filter((job) => job.housing === "Housing Unknown"),
+  };
+
+  const navButtonClass = (name) =>
+    `housing-tab neutral-tab ${page === name ? "active" : ""}`;
+
+  const filterButtonClass = (name) =>
+    `housing-tab ${filter === name ? "active" : ""} ${getFilterClass(name)}`;
+
+  return (
+    <div className="page-shell">
+      <section className="hero">
+        <div className="hero-content">
+          <div className="hero-box">
+            <h1>Golf Job Hub</h1>
+            <p>Find seasonal golf jobs with housing</p>
+            <button
+              className="hero-button"
+              onClick={() => {
+                window.location.hash = "filters";
+                setPage("Jobs");
+              }}
+            >
+              Start Browsing
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <nav className="housing-section primary-nav" aria-label="Primary navigation">
+        <div className="section-card">
+          <div className="housing-tabs">
+            {["Home", "Jobs", "Housing", "Signup", "Employer", "PostJob"].map((name) => (
+              <button
+                key={name}
+                className={navButtonClass(name)}
+                onClick={() => setPage(name)}
+              >
+                {getPageLabel(name)}
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      {page === "Home" && (
+        <section className="housing-section">
+          <div className="section-card">
+            <h2>Welcome</h2>
+            <p>Find golf jobs with housing info.</p>
+            <p>{todaysJoke}</p>
+          </div>
