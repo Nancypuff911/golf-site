@@ -1,5 +1,4 @@
 import { useState } from "react";
-import EmployerDashboard from "./EmployerDashboard";
 import PostJob from "./PostJob";
 import jobs from "./jobs";
 import "./App.css";
@@ -110,6 +109,7 @@ function App() {
                 Showing {filteredJobs.length} jobs - {locationFilter} -{" "}
                 {filter === "All" ? "All Housing" : filter}
               </p>
+
               <div className="housing-tabs">
                 {["All Locations", "BC", "Alberta", "USA"].map((name) => (
                   <button
@@ -123,6 +123,7 @@ function App() {
                   </button>
                 ))}
               </div>
+
               <div className="housing-tabs">
                 {[
                   "All Housing",
@@ -159,6 +160,7 @@ function App() {
                 <p>
                   <strong>Pay:</strong> {job.pay}
                 </p>
+
                 {hasRatings(job) && (
                   <div className="ratings">
                     <span>Course {job.courseRating}</span>
@@ -168,10 +170,12 @@ function App() {
                     <span>Staff {job.staffRating}</span>
                   </div>
                 )}
+
                 <p>{job.description}</p>
                 <p>
                   <strong>Contact:</strong> {job.contact}
                 </p>
+
                 <div className="job-actions">
                   <span className={`housing-badge ${getHousingClass(job.housing)}`}>
                     {job.housing}
@@ -194,8 +198,8 @@ function App() {
               {items.length === 0 ? (
                 <p>No jobs listed yet.</p>
               ) : (
-                items.map((job, i) => (
-                  <p key={`${job.course}-${i}`}>
+                items.map((job, index) => (
+                  <p key={`${job.course}-${index}`}>
                     {job.course} - {job.title}
                   </p>
                 ))
@@ -215,13 +219,14 @@ function App() {
       )}
 
       {page === "Employer" && (
-  <section className="housing-section">
-    <div className="section-card">
-      <h2>Employer Dashboard</h2>
-      <p>Coming soon.</p>
-    </div>
-  </section>
-)}
+        <section className="housing-section">
+          <div className="section-card">
+            <h2>Employer Dashboard</h2>
+            <p>Coming soon.</p>
+          </div>
+        </section>
+      )}
+
       {page === "PostJob" && <PostJob />}
     </div>
   );
