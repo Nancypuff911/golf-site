@@ -1,1 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Post a Job</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="jobs.html">Job Board</a>
+      <nav class="nav">
+        <a href="jobs.html">View Jobs</a>
+        <a aria-current="page" href="index.html">Post a Job</a>
+      </nav>
+    </header>
 
+    <main class="page">
+      <section class="intro">
+        <p class="eyebrow">Employers</p>
+        <h1>Post a job opening</h1>
+        <p>Submit the details below. New listings are reviewed before they appear on the site.</p>
+      </section>
+
+      <form id="job-form" class="form-panel">
+        <div class="field-grid">
+          <label>
+            Company
+            <input name="company" type="text" autocomplete="organization" required>
+          </label>
+
+          <label>
+            Contact name
+            <input name="contactName" type="text" autocomplete="name" required>
+          </label>
+
+          <label>
+            Contact email
+            <input name="contactEmail" type="email" autocomplete="email" required>
+          </label>
+
+          <label>
+            Job title
+            <input name="jobTitle" type="text" required>
+          </label>
+
+          <label>
+            Location
+            <input name="location" type="text" placeholder="City, province/state, or Remote" required>
+          </label>
+
+          <label>
+            Job type
+            <select name="jobType" required>
+              <option value="">Choose one</option>
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Contract</option>
+              <option>Temporary</option>
+              <option>Seasonal</option>
+              <option>Volunteer</option>
+            </select>
+          </label>
+
+          <label>
+            Pay range
+            <input name="payRange" type="text" placeholder="$25-$32/hour">
+          </label>
+
+          <label>
+            Apply URL
+            <input name="applyUrl" type="url" placeholder="https://example.com/apply">
+          </label>
+        </div>
+
+        <label>
+          Job description
+          <textarea name="description" rows="8" required></textarea>
+        </label>
+
+        <div class="actions">
+          <button id="submit-button" type="submit">Submit Job</button>
+          <p id="form-status" class="status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
