@@ -170,7 +170,7 @@ function App() {
             ) : (
               items.map((job, i) => (
                 <p key={i}>
-                  {job.course} — {job.title}
+                  {job.course} — {job.title}_
                 </p>
               ))
             )}
