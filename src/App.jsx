@@ -2,6 +2,7 @@ import { useState } from "react";
 import EmployerDashboard from "./EmployerDashboard";
 import PostJob from "./PostJob";
 import jobs from "./jobs";
+import "./App.css";
 
 const getEmailAddress = (value = "") =>
   value.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0];
@@ -45,19 +46,30 @@ function App() {
     marginBottom: "10px",
     padding: "10px 16px",
     borderRadius: "999px",
-    border: "none",
+    border: "1px solid rgba(255,255,255,0.28)",
     cursor: "pointer",
-    background: page === name ? "#2f6f3e" : "#4caf50",
+    background:
+      page === name ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.16)",
     color: "white",
     fontWeight: "600",
+    boxShadow:
+      page === name
+        ? "0 0 18px rgba(255,255,255,0.28), 0 10px 28px rgba(0,0,0,0.2)"
+        : "0 10px 28px rgba(0,0,0,0.16)",
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
   });
 
   const cardStyle = {
-    background: "#2f6f3e",
+    background: "rgba(255,255,255,0.18)",
+    border: "1px solid rgba(255,255,255,0.28)",
     padding: "20px",
     marginBottom: "18px",
-    borderRadius: "12px",
+    borderRadius: "22px",
     color: "white",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
   };
 
   const applyButtonStyle = {
@@ -65,14 +77,14 @@ function App() {
     marginTop: "12px",
     padding: "10px 16px",
     borderRadius: "999px",
-    background: "white",
-    color: "#2f6f3e",
+    background: "rgba(255,255,255,0.9)",
+    color: "#0b5d1e",
     textDecoration: "none",
     fontWeight: "700",
   };
 
   return (
-    <div style={{ padding: "30px", color: "black" }}>
+    <div style={{ padding: "30px", color: "white" }}>
       <h1>Golf Job Hub</h1>
 
       <button onClick={() => setPage("Home")} style={navButtonStyle("Home")}>
@@ -170,7 +182,7 @@ function App() {
             ) : (
               items.map((job, i) => (
                 <p key={i}>
-                  {job.course} — {job.title}_
+                  {job.course} — {job.title}
                 </p>
               ))
             )}
