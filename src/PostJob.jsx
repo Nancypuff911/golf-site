@@ -51,27 +51,66 @@ function PostJob() {
     <section className="housing-section">
       <div className="section-card">
         <h2>Post a Job</h2>
-        <p>
-          Submit a golf job opening. New listings are reviewed before they appear
+        <p className="filter-summary">
+          Share a golf job opening. New listings are reviewed before they appear
           on the site.
         </p>
 
-        <form className="job-form" onSubmit={handleSubmit}>
-          <input name="company" placeholder="Company" required />
-          <input name="contactName" placeholder="Contact name" required />
-          <input name="contactEmail" type="email" placeholder="Contact email" required />
-          <input name="jobTitle" placeholder="Job title" required />
-          <input name="location" placeholder="Location" required />
-          <input name="jobType" placeholder="Job type" required />
-          <input name="payRange" placeholder="Pay range" />
-          <input name="applyUrl" type="url" placeholder="Apply link" />
-          <textarea name="description" placeholder="Job description" required />
+        <form className="post-job-form" onSubmit={handleSubmit}>
+          <div className="post-job-grid">
+            <label>
+              Company
+              <input name="company" required />
+            </label>
 
-          <button className="hero-button" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit Job"}
-          </button>
+            <label>
+              Contact name
+              <input name="contactName" required />
+            </label>
 
-          {status && <p>{status}</p>}
+            <label>
+              Contact email
+              <input name="contactEmail" type="email" required />
+            </label>
+
+            <label>
+              Job title
+              <input name="jobTitle" required />
+            </label>
+
+            <label>
+              Location
+              <input name="location" placeholder="Augusta, Georgia" required />
+            </label>
+
+            <label>
+              Job type
+              <input name="jobType" placeholder="Seasonal, full-time, part-time" required />
+            </label>
+
+            <label>
+              Pay range
+              <input name="payRange" placeholder="$18-$24/hour" />
+            </label>
+
+            <label>
+              Apply link
+              <input name="applyUrl" type="url" placeholder="https://example.com/apply" />
+            </label>
+          </div>
+
+          <label>
+            Job description
+            <textarea name="description" rows="7" required />
+          </label>
+
+          <div className="post-job-actions">
+            <button className="hero-button" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit Job"}
+            </button>
+
+            {status && <p className="post-job-status">{status}</p>}
+          </div>
         </form>
       </div>
     </section>
