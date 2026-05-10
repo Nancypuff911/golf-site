@@ -23,8 +23,8 @@ function App() {
 
   const jokes = [
     "Why do golfers carry two pairs of pants? In case they get a hole in one.",
-    "I’m not saying my golf game is bad, but I just got a sponsorship from Top Flite.",
-    "My golf game is like taxes — I lose a lot of balls and don’t know where they went.",
+    "I'm not saying my golf game is bad, but I just got a sponsorship from Top Flite.",
+    "My golf game is like taxes - I lose a lot of balls and don't know where they went.",
     "Golf is the only sport where yelling 'FORE!' actually makes things worse.",
     "Why did the golfer bring an extra sock? In case he got a hole in one.",
   ];
@@ -41,169 +41,129 @@ function App() {
     "Housing Unknown": jobs.filter((job) => job.housing === "Housing Unknown"),
   };
 
-  const navButtonStyle = (name) => ({
-    marginRight: "10px",
-    marginBottom: "10px",
-    padding: "10px 16px",
-    borderRadius: "999px",
-    border: "1px solid rgba(255,255,255,0.28)",
-    cursor: "pointer",
-    background:
-      page === name ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.16)",
-    color: "white",
-    fontWeight: "600",
-    boxShadow:
-      page === name
-        ? "0 0 18px rgba(255,255,255,0.28), 0 10px 28px rgba(0,0,0,0.2)"
-        : "0 10px 28px rgba(0,0,0,0.16)",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-  });
+  const navButtonClass = (name) =>
+    `housing-tab neutral-tab ${page === name ? "active" : ""}`;
 
-  const pageStyle = {
-    padding: "30px",
-    color: "white",
-    maxWidth: "1050px",
-    margin: "0 auto",
-    textAlign: "center",
-  };
-
-  const cardStyle = {
-    background: "rgba(255,255,255,0.1)",
-    border: "1px solid rgba(255,255,255,0.24)",
-    padding: "20px",
-    margin: "0 auto 18px",
-    maxWidth: "760px",
-    borderRadius: "22px",
-    color: "white",
-    textAlign: "center",
-    boxShadow: "0 14px 36px rgba(0,0,0,0.2)",
-    backdropFilter: "blur(16px)",
-    WebkitBackdropFilter: "blur(16px)",
-  };
-
-  const applyButtonStyle = {
-    display: "inline-block",
-    marginTop: "12px",
-    padding: "10px 16px",
-    borderRadius: "999px",
-    background: "rgba(255,255,255,0.9)",
-    color: "#0b5d1e",
-    textDecoration: "none",
-    fontWeight: "700",
-  };
+  const filterButtonClass = (name) =>
+    `housing-tab ${filter === name ? "active" : ""} ${getFilterClass(name)}`;
 
   return (
-    <div style={pageStyle}>
-      <h1>Golf Job Hub</h1>
+    <div className="page-shell">
+      <section className="hero">
+        <div className="hero-content">
+          <div className="hero-box">
+            <h1>Golf Job Hub</h1>
+            <p>Find seasonal golf jobs with housing info.</p>
+          </div>
+        </div>
+      </section>
 
-      <button onClick={() => setPage("Home")} style={navButtonStyle("Home")}>
-        Home
-      </button>
-      <button onClick={() => setPage("Jobs")} style={navButtonStyle("Jobs")}>
-        Jobs
-      </button>
-      <button onClick={() => setPage("Housing")} style={navButtonStyle("Housing")}>
-        Housing
-      </button>
-      <button onClick={() => setPage("Signup")} style={navButtonStyle("Signup")}>
-        Sign Up
-      </button>
-      <button onClick={() => setPage("Employer")} style={navButtonStyle("Employer")}>
-        Employer
-      </button>
-      <button onClick={() => setPage("PostJob")} style={navButtonStyle("PostJob")}>
-        Post Job
-      </button>
+      <nav className="housing-section" aria-label="Primary navigation">
+        <div className="section-card">
+          <div className="housing-tabs">
+            {["Home", "Jobs", "Housing", "Signup", "Employer", "PostJob"].map((name) => (
+              <button
+                key={name}
+                className={navButtonClass(name)}
+                onClick={() => setPage(name)}
+              >
+                {getPageLabel(name)}
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
 
       {page === "Home" && (
-        <div style={cardStyle}>
-          <h2>Welcome</h2>
-          <p>Find golf jobs with housing info.</p>
-          <p>{todaysJoke}</p>
-        </div>
+        <section className="housing-section">
+          <div className="section-card">
+            <h2>Welcome</h2>
+            <p>Find golf jobs with housing info.</p>
+            <p>{todaysJoke}</p>
+          </div>
+        </section>
       )}
 
       {page === "Jobs" && (
         <>
-          <div style={{ marginBottom: "18px" }}>
-            <button onClick={() => setFilter("All")} style={navButtonStyle("All")}>
-              All
-            </button>
-            <button
-              onClick={() => setFilter("Housing Available")}
-              style={navButtonStyle("Housing Available")}
-            >
-              Housing Available
-            </button>
-            <button
-              onClick={() => setFilter("Partial Housing")}
-              style={navButtonStyle("Partial Housing")}
-            >
-              Partial Housing
-            </button>
-            <button
-              onClick={() => setFilter("No Housing")}
-              style={navButtonStyle("No Housing")}
-            >
-              No Housing
-            </button>
-            <button
-              onClick={() => setFilter("Housing Unknown")}
-              style={navButtonStyle("Housing Unknown")}
-            >
-              Housing Unknown
-            </button>
-          </div>
-
-          {filteredJobs.map((job, index) => (
-            <div key={index} style={cardStyle}>
-              <h3>{job.title}</h3>
-              <p>
-                <strong>Course:</strong> {job.course}
-              </p>
-              <p>
-                <strong>Location:</strong> {job.location}
-              </p>
-              <p>
-                <strong>Housing:</strong> {job.housing}
-              </p>
-              <p>
-                <strong>Pay:</strong> {job.pay}
-              </p>
-              <p>{job.description}</p>
-              <p>
-                <strong>Contact:</strong> {job.contact}
-              </p>
-              <a href={getApplyLink(job)} style={applyButtonStyle}>
-                Contact Employer
-              </a>
+          <section className="housing-section">
+            <div className="section-card">
+              <h2>Filters</h2>
+              <div className="housing-tabs">
+                {[
+                  "All",
+                  "Housing Available",
+                  "Partial Housing",
+                  "No Housing",
+                  "Housing Unknown",
+                ].map((name) => (
+                  <button
+                    key={name}
+                    className={filterButtonClass(name)}
+                    onClick={() => setFilter(name)}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </div>
             </div>
-          ))}
+          </section>
+
+          <section className="jobs-grid">
+            {filteredJobs.map((job, index) => (
+              <article key={`${job.course}-${job.title}-${index}`} className="card">
+                <h3>{job.title}</h3>
+                <p>
+                  <strong>Course:</strong> {job.course}
+                </p>
+                <p>
+                  <strong>Location:</strong> {job.location}
+                </p>
+                <p>
+                  <strong>Housing:</strong> {job.housing}
+                </p>
+                <p>
+                  <strong>Pay:</strong> {job.pay}
+                </p>
+                <p>{job.description}</p>
+                <p>
+                  <strong>Contact:</strong> {job.contact}
+                </p>
+                <a href={getApplyLink(job)} className="email-button">
+                  {job.applyText || "Contact Employer"}
+                </a>
+              </article>
+            ))}
+          </section>
         </>
       )}
 
-      {page === "Housing" &&
-        Object.entries(housingGroups).map(([group, items]) => (
-          <div key={group} style={cardStyle}>
-            <h3>{group}</h3>
-            {items.length === 0 ? (
-              <p>No jobs listed yet.</p>
-            ) : (
-              items.map((job, i) => (
-                <p key={i}>
-                  {job.course} — {job.title}
-                </p>
-              ))
-            )}
-          </div>
-        ))}
+      {page === "Housing" && (
+        <section className="jobs-grid">
+          {Object.entries(housingGroups).map(([group, items]) => (
+            <article key={group} className="card">
+              <h3>{group}</h3>
+              {items.length === 0 ? (
+                <p>No jobs listed yet.</p>
+              ) : (
+                items.map((job, i) => (
+                  <p key={`${job.course}-${i}`}>
+                    {job.course} - {job.title}
+                  </p>
+                ))
+              )}
+            </article>
+          ))}
+        </section>
+      )}
 
       {page === "Signup" && (
-        <div style={cardStyle}>
-          <h2>Sign Up</h2>
-          <input placeholder="Name" />
-        </div>
+        <section className="housing-section">
+          <div className="section-card">
+            <h2>Sign Up</h2>
+            <input placeholder="Name" />
+          </div>
+        </section>
       )}
 
       {page === "Employer" && <EmployerDashboard />}
@@ -211,5 +171,18 @@ function App() {
     </div>
   );
 }
+
+const getPageLabel = (name) => {
+  if (name === "Signup") return "Sign Up";
+  if (name === "PostJob") return "Post Job";
+  return name;
+};
+
+const getFilterClass = (name) => {
+  if (name === "Housing Available") return "available-tab";
+  if (name === "Partial Housing") return "partial-tab";
+  if (name === "No Housing") return "none-tab";
+  return "neutral-tab";
+};
 
 export default App;
