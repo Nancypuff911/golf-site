@@ -111,7 +111,7 @@ function App() {
                 {filter === "All" ? "All Housing" : filter}
               </p>
               <div className="housing-tabs">
-                {["All Locations", "BC", "Alberta"].map((name) => (
+                {["All Locations", "BC", "Alberta", "USA"].map((name) => (
                   <button
                     key={name}
                     className={`housing-tab neutral-tab ${
