@@ -6,14 +6,26 @@ import "./App.css";
 const getEmailAddress = (value = "") =>
   value.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0];
 
-const getApplyLink = (job) => {
+const isWebsiteUrl = (value = "") => /^https?:\/\//i.test(value.trim());
+
+const getApplyAction = (job) => {
+  if (isWebsiteUrl(job.applyLink)) {
+    return {
+      href: job.applyLink,
+      label: "Visit Employer",
+    };
+  }
+
   const email = getEmailAddress(job.applyLink) || getEmailAddress(job.contact);
 
   if (email) {
-    return `mailto:${email}`;
+    return {
+      href: `mailto:${email}`,
+      label: "Contact Employer",
+    };
   }
 
-  return job.applyLink;
+  return null;
 };
 
 function App() {
@@ -146,45 +158,7 @@ function App() {
 
           <section className="jobs-grid">
             {filteredJobs.map((job, index) => (
-              <article key={`${job.course}-${job.title}-${index}`} className="card">
-                <h3>{job.course}</h3>
-                <p>
-                  <strong>Location:</strong> {job.location}
-                </p>
-                <p>
-                  <strong>Role:</strong> {job.title}
-                </p>
-                <p>
-                  <strong>Job Type:</strong> {job.type || "Seasonal"}
-                </p>
-                <p>
-                  <strong>Pay:</strong> {job.pay}
-                </p>
-
-                {hasRatings(job) && (
-                  <div className="ratings">
-                    <span>Course {job.courseRating}</span>
-                    <span>|</span>
-                    <span>Difficulty {job.difficulty}</span>
-                    <span>|</span>
-                    <span>Staff {job.staffRating}</span>
-                  </div>
-                )}
-
-                <p>{job.description}</p>
-                <p>
-                  <strong>Contact:</strong> {job.contact}
-                </p>
-
-                <div className="job-actions">
-                  <span className={`housing-badge ${getHousingClass(job.housing)}`}>
-                    {job.housing}
-                  </span>
-                  <a href={getApplyLink(job)} className="email-button">
-                    {job.applyText || "Contact Employer"}
-                  </a>
-                </div>
-              </article>
+              <JobCard key={`${job.course}-${job.title}-${index}`} job={job} />
             ))}
           </section>
         </>
@@ -229,6 +203,55 @@ function App() {
 
       {page === "PostJob" && <PostJob />}
     </div>
+  );
+}
+
+function JobCard({ job }) {
+  const applyAction = getApplyAction(job);
+
+  return (
+    <article className="card">
+      <h3>{job.course}</h3>
+      <p>
+        <strong>Location:</strong> {job.location}
+      </p>
+      <p>
+        <strong>Role:</strong> {job.title}
+      </p>
+      <p>
+        <strong>Job Type:</strong> {job.type || "Seasonal"}
+      </p>
+      <p>
+        <strong>Pay:</strong> {job.pay}
+      </p>
+
+      {hasRatings(job) && (
+        <div className="ratings">
+          <span>Course {job.courseRating}</span>
+          <span>|</span>
+          <span>Difficulty {job.difficulty}</span>
+          <span>|</span>
+          <span>Staff {job.staffRating}</span>
+        </div>
+      )}
+
+      <p>{job.description}</p>
+      <p>
+        <strong>Contact:</strong> {job.contact}
+      </p>
+
+      <div className="job-actions">
+        <span className={`housing-badge ${getHousingClass(job.housing)}`}>
+          {job.housing}
+        </span>
+
+        {applyAction && (
+          <a href={applyAction.href} className="email-button">
+            {applyAction.label}
+          </a>
+        )}
+      </div>
+    </article>
   );
 }
 
