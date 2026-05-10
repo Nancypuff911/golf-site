@@ -256,6 +256,7 @@ const getRegion = (location = "") => {
     normalized.includes("florida") ||
     normalized.includes("arizona") ||
     normalized.includes("texas")
+    normalized.includes("georgia")
   ) {
     return "USA";
   }
