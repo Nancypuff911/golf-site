@@ -1,55 +1,81 @@
-function EmployerDashboard() {
-  const pageStyle = {
-    maxWidth: "1050px",
-    margin: "0 auto",
-  };
+import { useState } from "react";
 
-  const boxStyle = {
-    background: "rgba(255,255,255,0.18)",
-    border: "1px solid rgba(255,255,255,0.28)",
-    padding: "20px",
-    marginBottom: "18px",
-    borderRadius: "22px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-    color: "#ffffff",
-  };
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyMoJ4vAFaxleNDt7WcM1B3YtHlq6c2HQLyaja90p76dNaEZIhCR9pbVyn1ZRVYW6MzCw/exec";
 
-  const buttonStyle = {
-    marginRight: "10px",
-    marginTop: "10px",
-    padding: "10px 16px",
-    borderRadius: "10px",
-    border: "none",
-    background: "#4caf50",
-    color: "white",
-    cursor: "pointer",
-    fontWeight: "600",
+function PostJob() {
+  const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    const job = {
+      company: String(data.get("company") || "").trim(),
+      contactName: String(data.get("contactName") || "").trim(),
+      contactEmail: String(data.get("contactEmail") || "").trim(),
+      jobTitle: String(data.get("jobTitle") || "").trim(),
+      location: String(data.get("location") || "").trim(),
+      jobType: String(data.get("jobType") || "").trim(),
+      payRange: String(data.get("payRange") || "").trim(),
+      applyUrl: String(data.get("applyUrl") || "").trim(),
+      description: String(data.get("description") || "").trim(),
+    };
+
+    setIsSubmitting(true);
+    setStatus("Submitting...");
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(job),
+      });
+
+      form.reset();
+      setStatus("Submitted. Your listing will appear after review.");
+    } catch {
+      setStatus("Could not submit. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div style={pageStyle}>
-      <div style={boxStyle}>
-        <h1 style={{ marginTop: 0 }}>Employer Dashboard</h1>
-        <button style={buttonStyle}>+ Post a Job</button>
-      </div>
+    <section className="housing-section">
+      <div className="section-card">
+        <h2>Post a Job</h2>
+        <p>
+          Submit a golf job opening. New listings are reviewed before they appear
+          on the site.
+        </p>
 
-      <div style={boxStyle}>
-        <p><strong>Active:</strong> 3</p>
-        <p><strong>Expired:</strong> 1</p>
-        <p><strong>Applications:</strong> 0</p>
-      </div>
+        <form className="job-form" onSubmit={handleSubmit}>
+          <input name="company" placeholder="Company" required />
+          <input name="contactName" placeholder="Contact name" required />
+          <input name="contactEmail" type="email" placeholder="Contact email" required />
+          <input name="jobTitle" placeholder="Job title" required />
+          <input name="location" placeholder="Location" required />
+          <input name="jobType" placeholder="Job type" required />
+          <input name="payRange" placeholder="Pay range" />
+          <input name="applyUrl" type="url" placeholder="Apply link" />
+          <textarea name="description" placeholder="Job description" required />
 
-      <div style={boxStyle}>
-        <h3 style={{ marginTop: 0 }}>Assistant Superintendent</h3>
-        <p>Sagebrush – Merritt, BC</p>
-        <p>Housing: Partial</p>
-        <button style={buttonStyle}>Edit</button>
-        <button style={buttonStyle}>Renew</button>
+          <button className="hero-button" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Submit Job"}
+          </button>
+
+          {status && <p>{status}</p>}
+        </form>
       </div>
-    </div>
+    </section>
   );
 }
 
-export default EmployerDashboard;
+export default PostJob;
