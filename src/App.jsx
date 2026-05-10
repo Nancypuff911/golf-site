@@ -214,7 +214,14 @@ function App() {
         </section>
       )}
 
-      {page === "Employer" && <EmployerDashboard />}
+      {page === "Employer" && (
+  <section className="housing-section">
+    <div className="section-card">
+      <h2>Employer Dashboard</h2>
+      <p>Coming soon.</p>
+    </div>
+  </section>
+)}
       {page === "PostJob" && <PostJob />}
     </div>
   );
