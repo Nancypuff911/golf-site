@@ -60,16 +60,26 @@ function App() {
     WebkitBackdropFilter: "blur(12px)",
   });
 
+  const pageStyle = {
+    padding: "30px",
+    color: "white",
+    maxWidth: "1050px",
+    margin: "0 auto",
+    textAlign: "center",
+  };
+
   const cardStyle = {
-    background: "rgba(255,255,255,0.18)",
-    border: "1px solid rgba(255,255,255,0.28)",
+    background: "rgba(255,255,255,0.1)",
+    border: "1px solid rgba(255,255,255,0.24)",
     padding: "20px",
-    marginBottom: "18px",
+    margin: "0 auto 18px",
+    maxWidth: "760px",
     borderRadius: "22px",
     color: "white",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
+    textAlign: "center",
+    boxShadow: "0 14px 36px rgba(0,0,0,0.2)",
+    backdropFilter: "blur(16px)",
+    WebkitBackdropFilter: "blur(16px)",
   };
 
   const applyButtonStyle = {
@@ -84,7 +94,7 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "30px", color: "white" }}>
+    <div style={pageStyle}>
       <h1>Golf Job Hub</h1>
 
       <button onClick={() => setPage("Home")} style={navButtonStyle("Home")}>
