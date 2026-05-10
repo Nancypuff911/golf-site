@@ -249,13 +249,14 @@ const getRegion = (location = "") => {
 
   if (location.includes("BC")) return "BC";
   if (location.includes("AB")) return "Alberta";
+
   if (
     normalized.includes("usa") ||
     normalized.includes("united states") ||
     normalized.includes("california") ||
     normalized.includes("florida") ||
     normalized.includes("arizona") ||
-    normalized.includes("texas")
+    normalized.includes("texas") ||
     normalized.includes("georgia")
   ) {
     return "USA";
@@ -263,6 +264,5 @@ const getRegion = (location = "") => {
 
   return "Other";
 };
-
 
 export default App;
