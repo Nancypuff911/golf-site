@@ -196,5 +196,3 @@ const jobs = [
 ];
 
 export default jobs;
-
-export default jobs;
