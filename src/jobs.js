@@ -20,6 +20,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://sagebrushgolfclub.com/contact-us/",
     contact: "Contact employer",
+    courseRating: 4.7,
+    difficulty: "Hard",
+    staffRating: 4.2,
     description: "Kitchen position at Sagebrush Golf Club.",
   },
   {
@@ -42,6 +45,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://bigskygolf.ca/contact-us/",
     contact: "Contact employer",
+    courseRating: 4.6,
+    difficulty: "Moderate",
+    staffRating: 4.0,
     description: "Guest services position with partial housing.",
   },
   {
@@ -53,6 +59,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://www.sandpipergolf.com",
     contact: "Contact employer",
+    courseRating: 4.3,
+    difficulty: "Moderate",
+    staffRating: 3.9,
     description: "Seasonal maintenance role at a scenic Fraser Valley course.",
   },
   {
@@ -64,6 +73,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://careers.accor.com",
     contact: "Contact employer",
+    courseRating: 4.8,
+    difficulty: "Hard",
+    staffRating: 4.5,
     description: "Luxury resort golf environment with staff housing.",
   },
   {
@@ -75,6 +87,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://www.whistlergolf.com",
     contact: "Contact employer",
+    courseRating: 4.4,
+    difficulty: "Moderate",
+    staffRating: 4.0,
     description: "Guest services role at a high traffic Whistler course.",
   },
   {
@@ -86,6 +101,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://www.predatorridge.com",
     contact: "Contact employer",
+    courseRating: 4.6,
+    difficulty: "Moderate-Hard",
+    staffRating: 4.3,
     description: "Seasonal resort operations role at an Okanagan golf property.",
   },
   {
@@ -97,6 +115,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://nicklausnorth.com",
     contact: "Contact employer",
+    courseRating: 4.5,
+    difficulty: "Moderate",
+    staffRating: 3.8,
     description: "Course staff role at a well-known Whistler golf course.",
   },
   {
@@ -108,6 +129,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://tobianogolf.com",
     contact: "Contact employer",
+    courseRating: 4.8,
+    difficulty: "Hard",
+    staffRating: 4.3,
     description: "Seasonal course and hospitality work at a desert-style course overlooking Kamloops Lake.",
   },
   {
@@ -119,6 +143,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://qhotels.ca/talking-rock",
     contact: "Contact employer",
+    courseRating: 4.6,
+    difficulty: "Moderate",
+    staffRating: 4.2,
     description: "Lakeside resort golf role with strong tourism traffic.",
   },
   {
@@ -130,6 +157,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://greywolfgolf.com",
     contact: "Contact employer",
+    courseRating: 4.7,
+    difficulty: "Hard",
+    staffRating: 4.4,
     description: "Mountain course staff role at Greywolf Golf Course.",
   },
   {
@@ -141,6 +171,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://sunpeaksresort.com",
     contact: "Contact employer",
+    courseRating: 4.5,
+    difficulty: "Moderate",
+    staffRating: 4.1,
     description: "Seasonal resort and course staff role in a busy resort environment.",
   },
   {
@@ -152,6 +185,9 @@ const jobs = [
     applyText: "Visit Employer",
     applyLink: "https://therisegolf.ca",
     contact: "Contact employer",
+    courseRating: 4.5,
+    difficulty: "Moderate-Hard",
+    staffRating: 4.1,
     description: "Course and clubhouse staff role at an elevated course with panoramic views.",
   },
 ];

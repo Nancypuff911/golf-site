@@ -18,8 +18,11 @@ const getApplyLink = (job) => {
 };
 
 function App() {
-  const [page, setPage] = useState("Home");
+  const [page, setPage] = useState(() =>
+    window.location.hash === "#filters" ? "Jobs" : "Home",
+  );
   const [filter, setFilter] = useState("All");
+  const [locationFilter, setLocationFilter] = useState("All Locations");
 
   const jokes = [
     "Why do golfers carry two pairs of pants? In case they get a hole in one.",
@@ -31,8 +34,13 @@ function App() {
 
   const todaysJoke = jokes[new Date().getDate() % jokes.length];
 
-  const filteredJobs =
-    filter === "All" ? jobs : jobs.filter((job) => job.housing === filter);
+  const filteredJobs = jobs.filter((job) => {
+    const housingMatch = filter === "All" || job.housing === filter;
+    const locationMatch =
+      locationFilter === "All Locations" || getRegion(job.location) === locationFilter;
+
+    return housingMatch && locationMatch;
+  });
 
   const housingGroups = {
     "Housing Available": jobs.filter((job) => job.housing === "Housing Available"),
@@ -53,12 +61,21 @@ function App() {
         <div className="hero-content">
           <div className="hero-box">
             <h1>Golf Job Hub</h1>
-            <p>Find seasonal golf jobs with housing info.</p>
+            <p>Find seasonal golf jobs with housing</p>
+            <button
+              className="hero-button"
+              onClick={() => {
+                window.location.hash = "filters";
+                setPage("Jobs");
+              }}
+            >
+              Start Browsing
+            </button>
           </div>
         </div>
       </section>
 
-      <nav className="housing-section" aria-label="Primary navigation">
+      <nav className="housing-section primary-nav" aria-label="Primary navigation">
         <div className="section-card">
           <div className="housing-tabs">
             {["Home", "Jobs", "Housing", "Signup", "Employer", "PostJob"].map((name) => (
@@ -86,12 +103,29 @@ function App() {
 
       {page === "Jobs" && (
         <>
-          <section className="housing-section">
+          <section id="filters" className="housing-section">
             <div className="section-card">
               <h2>Filters</h2>
+              <p className="filter-summary">
+                Showing {filteredJobs.length} jobs - {locationFilter} -{" "}
+                {filter === "All" ? "All Housing" : filter}
+              </p>
+              <div className="housing-tabs">
+                {["All Locations", "BC", "Alberta"].map((name) => (
+                  <button
+                    key={name}
+                    className={`housing-tab neutral-tab ${
+                      locationFilter === name ? "active" : ""
+                    }`}
+                    onClick={() => setLocationFilter(name)}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </div>
               <div className="housing-tabs">
                 {[
-                  "All",
+                  "All Housing",
                   "Housing Available",
                   "Partial Housing",
                   "No Housing",
@@ -99,8 +133,8 @@ function App() {
                 ].map((name) => (
                   <button
                     key={name}
-                    className={filterButtonClass(name)}
-                    onClick={() => setFilter(name)}
+                    className={filterButtonClass(name === "All Housing" ? "All" : name)}
+                    onClick={() => setFilter(name === "All Housing" ? "All" : name)}
                   >
                     {name}
                   </button>
@@ -112,26 +146,40 @@ function App() {
           <section className="jobs-grid">
             {filteredJobs.map((job, index) => (
               <article key={`${job.course}-${job.title}-${index}`} className="card">
-                <h3>{job.title}</h3>
-                <p>
-                  <strong>Course:</strong> {job.course}
-                </p>
+                <h3>{job.course}</h3>
                 <p>
                   <strong>Location:</strong> {job.location}
                 </p>
                 <p>
-                  <strong>Housing:</strong> {job.housing}
+                  <strong>Role:</strong> {job.title}
+                </p>
+                <p>
+                  <strong>Job Type:</strong> {job.type || "Seasonal"}
                 </p>
                 <p>
                   <strong>Pay:</strong> {job.pay}
                 </p>
+                {hasRatings(job) && (
+                  <div className="ratings">
+                    <span>Course {job.courseRating}</span>
+                    <span>|</span>
+                    <span>Difficulty {job.difficulty}</span>
+                    <span>|</span>
+                    <span>Staff {job.staffRating}</span>
+                  </div>
+                )}
                 <p>{job.description}</p>
                 <p>
                   <strong>Contact:</strong> {job.contact}
                 </p>
-                <a href={getApplyLink(job)} className="email-button">
-                  {job.applyText || "Contact Employer"}
-                </a>
+                <div className="job-actions">
+                  <span className={`housing-badge ${getHousingClass(job.housing)}`}>
+                    {job.housing}
+                  </span>
+                  <a href={getApplyLink(job)} className="email-button">
+                    {job.applyText || "Contact Employer"}
+                  </a>
+                </div>
               </article>
             ))}
           </section>
@@ -179,10 +227,27 @@ const getPageLabel = (name) => {
 };
 
 const getFilterClass = (name) => {
+  if (name === "All") return "neutral-tab";
   if (name === "Housing Available") return "available-tab";
   if (name === "Partial Housing") return "partial-tab";
   if (name === "No Housing") return "none-tab";
   return "neutral-tab";
+};
+
+const getHousingClass = (housing) => {
+  if (housing === "Housing Available") return "available";
+  if (housing === "Partial Housing") return "partial";
+  if (housing === "No Housing") return "none";
+  return "unknown";
+};
+
+const hasRatings = (job) =>
+  job.courseRating || job.difficulty || job.staffRating;
+
+const getRegion = (location = "") => {
+  if (location.includes("BC")) return "BC";
+  if (location.includes("AB")) return "Alberta";
+  return "Other";
 };
 
 export default App;

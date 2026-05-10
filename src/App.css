@@ -69,8 +69,31 @@ body {
   color: white;
 }
 
+.hero-button {
+  border: none;
+  cursor: pointer;
+}
+
 .housing-section {
   margin-bottom: 30px;
+}
+
+.primary-nav {
+  margin-bottom: 28px;
+}
+
+.primary-nav .section-card {
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.primary-nav .housing-tabs {
+  margin: 0;
+}
+
+.primary-nav .housing-tab {
+  flex: 0 1 auto;
+  min-width: auto;
 }
 
 .section-card {
@@ -83,6 +106,11 @@ body {
 .section-card h2 {
   margin-top: 0;
   color: white;
+}
+
+.filter-summary {
+  margin: 10px 0 18px;
+  font-weight: 700;
 }
 
 .housing-tabs {
@@ -166,7 +194,8 @@ body {
   line-height: 1.4;
 }
 
-.housing {
+.housing,
+.housing-badge {
   padding: 8px 12px;
   border-radius: 10px;
   margin: 10px 0;
@@ -184,6 +213,39 @@ body {
 
 .none {
   background: #b22222;
+}
+
+.unknown {
+  background: rgba(102, 102, 102, 0.85);
+}
+
+.ratings {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: rgba(112, 75, 38, 0.58);
+  border: 1px solid rgba(255, 215, 128, 0.22);
+  border-radius: 10px;
+  margin: 14px 0;
+  padding: 10px 12px;
+  color: white;
+  font-weight: 700;
+}
+
+.job-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.job-actions .email-button,
+.job-actions .housing-badge {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .email-button,
@@ -260,8 +322,13 @@ body {
   }
 
   .housing-tab {
-    flex: 1 1 calc(50% - 10px);
-    min-width: 138px;
+    flex: 0 1 auto;
+    min-width: 120px;
+  }
+
+  .primary-nav .housing-tab {
+    flex: 0 1 auto;
+    min-width: auto;
   }
 
   .jobs-grid {
@@ -275,5 +342,17 @@ body {
   .employer-form textarea,
   .employer-form button {
     grid-column: span 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .housing-tab {
+    flex: 1 1 calc(50% - 10px);
+    min-width: 138px;
+  }
+
+  .primary-nav .housing-tab {
+    flex: 1 1 calc(50% - 10px);
+    min-width: 138px;
   }
 }
