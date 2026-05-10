@@ -5,8 +5,8 @@ const jobs = [
     location: "Augusta, Georgia",
     housing: "Housing Unknown",
     pay: "Not listed",
-    applyText: "Call to Apply",
-    applyLink: "tel:7067931035",
+    applyText: "Visit Employer",
+    applyLink: "https://www.goshengolfclub.com/",
     contact: "706-793-1035",
     description:
       "Assistant Superintendent position supporting golf course maintenance operations, turf health, irrigation, fertilizer and pesticide programs, staff supervision, course setup, and record keeping.",
