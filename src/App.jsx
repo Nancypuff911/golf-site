@@ -209,7 +209,7 @@ function App() {
         <section className="housing-section">
           <div className="section-card">
             <h2>Sign Up</h2>
-            <input placeholder="Name" />
+            <p>Coming soon.</p>
           </div>
         </section>
       )}
